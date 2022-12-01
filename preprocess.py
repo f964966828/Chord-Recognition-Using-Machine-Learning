@@ -2,10 +2,9 @@ import os
 import time
 import json
 import math
-from pitch_class_profiling import PitchClassProfiler
 from scipy.io import wavfile
 from scipy.io.wavfile import write
-from utils import get_params
+from utils import get_params, PitchClassProfiler
 
 params = get_params()
 train_data_path = params["train_data_path"]
