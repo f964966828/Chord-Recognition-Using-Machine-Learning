@@ -10,7 +10,6 @@ class PitchClassProfiler():
         self.read = False
 
     def _read_file(self):
-        #22050
         self._frecuency, self._samples = wavfile.read(self.file_name)        
         self.read = True
 
@@ -25,8 +24,6 @@ class PitchClassProfiler():
         return self._samples
 
     def fourier(self):
-        #print(len(fft(self.samples())))
-        #print(fft(self.samples()))
         return fft(self.samples())
 
     def plot_signal(self):
@@ -63,9 +60,6 @@ class PitchClassProfiler():
                     pcp[p] += abs(X[l])**2
         
         #Normalize pcp
-        #self.plot_signal()
-        #self.plot_fourier()
-
         pcp_norm = [0 for p in range(12)]
         for p in range(12):
             pcp_norm[p] = (pcp[p] / sum(pcp))
