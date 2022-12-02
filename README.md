@@ -25,17 +25,19 @@
 ## Dataset Hierarchy
 ```
 .
-├── Dataset
-│   ├── a
-│   ├── am
-│   ├── bm
-│   ├── c
-│   ├── d
-│   ├── dm
-│   ├── e
-│   ├── em
-│   ├── f
-│   ├── g
+├── NewDataset
+│   ├── A
+│   ├── Am
+│   ├── Bb
+│   ├── Bdim
+│   ├── Bm
+│   ├── C
+│   ├── D
+│   ├── Dm
+│   ├── E
+│   ├── Em
+│   ├── F
+│   ├── G
 │   └── data.json
 ├── TestWave
 │   ├── about_a_girl.wav
