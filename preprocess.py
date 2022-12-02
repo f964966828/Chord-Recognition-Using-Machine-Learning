@@ -46,12 +46,7 @@ def save_pitch():
 
             for file_name in os.listdir(train_label_path):
                 file_path = os.path.join(train_label_path, file_name)
-
-                # process all segments of audio file
-                ptc=PitchClassProfiler(file_path)
-                #if(plot_flag):
-                    #ptc.plot_profile()
-                    #plot_flag = False                
+                ptc=PitchClassProfiler(file_path)           
                 data["pitch"].append(ptc.get_profile())
                 data["labels"].append(i)
                 print("{} \t label:{}".format(file_path, i))
