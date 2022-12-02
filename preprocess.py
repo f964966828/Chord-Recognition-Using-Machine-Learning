@@ -39,7 +39,8 @@ def save_pitch():
         }        
         plot_flag = True
         # loop through all chord sub-folder
-        for i, label_name in enumerate(os.listdir(train_data_path)):
+        idx = 0
+        for label_name in os.listdir(train_data_path):
             
             if 'json' in label_name or 'wav' in label_name:
                 continue
@@ -50,21 +51,26 @@ def save_pitch():
 
             for file_name in os.listdir(train_label_path):
                 file_path = os.path.join(train_label_path, file_name)
-                ptc=PitchClassProfiler(file_path)                
+                ptc=PitchClassProfiler(file_path)    
+
                 if(plot_flag):
                     ptc.plot_signal(image_path)
                     ptc.plot_fourier(image_path)
                     ptc.plot_profile(image_path)
-                    plot_flag = False                    
+                    plot_flag = False        
+
                 if(file_name[0].islower()):                    
                     data['new'].append(0)
                 else:                    
                     data['new'].append(1)
+                    
                 data['frequency'].append(ptc.frequency())
                 data['len'].append(ptc.get_len())
                 data["pitch"].append(ptc.get_profile())
-                data["labels"].append(i)
-                print("{} \t label:{}".format(file_path, i))
+                data["labels"].append(idx)
+                print("{} \t label:{}".format(file_path, idx))
+
+            idx += 1
 
         # save pitch classes to json file
         with open(train_json_path, "w") as fp:
