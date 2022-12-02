@@ -78,6 +78,9 @@ def save_pitch():
     else:
         print("Start preprocess on %s" % test_file_name)
 
+        for file_name in os.listdir(test_wav_path):
+            os.remove(os.path.join(test_wav_path, file_name))
+
         # splitting input test file
         frecuency, samples = wavfile.read(test_file_path)
         N = len(samples) // unit
