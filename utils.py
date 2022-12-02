@@ -1,6 +1,7 @@
 import json
 import yaml
 import numpy as np
+import os
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.io import wavfile
@@ -47,13 +48,19 @@ class PitchClassProfiler():
         self.read = False
 
     def _read_file(self):
-        self._frecuency, self._samples = wavfile.read(self.file_name)   
+        self._frequency, samples = wavfile.read(self.file_name)   
+        #print(samples.shape)
+        try:
+            self._samples = samples[:, 0]
+        except:
+            self._samples = samples
+        #print(self._samples.shape)
         self.read = True
 
-    def frecuency(self):
+    def frequency(self):
         if not self.read:
             self._read_file()        
-        return self._frecuency
+        return self._frequency
 
     def samples(self):
         if not self.read:
@@ -63,18 +70,23 @@ class PitchClassProfiler():
     def fourier(self):
         return fft(self.samples())
 
-    def plot_signal(self):
+    def plot_signal(self, path):
         plt.plot(self.samples())
-        plt.show()
+        plt.savefig(os.path.join(path,'signal.png'))
+        #plt.show()
 
-    def plot_fourier(self):
+    def plot_fourier(self,path):
         plt.plot(self.fourier())
-        plt.show()
-
+        plt.savefig(os.path.join(path,'fourier.png'))
+        #plt.show()
+    def get_len(self):
+        if not self.read:
+            self._read_file()        
+        return len(self._samples)
     def pcp(self, X):
         #The algorithm here is implemented using
         #the names of the math formula as shown in the paper
-        fs = self.frecuency()
+        fs = self.frequency()
 
         #fref = [16.35, 17.32, 18.35, 19.45, 20.60, 21.83, 23.12, 24.50, 25.96, 27.50, 29.14, 30.87]
         #fref = [130.81, 138.59, 146.83, 155.56, 164.81, 174.61, 185.00, 196.00, 207.65, 220.00, 233.08, 246.94]
@@ -106,23 +118,24 @@ class PitchClassProfiler():
         X = self.fourier()        
         return self.pcp(X)
         
-    def plot_profile(self):
+    def plot_profile(self,path):
         objects = ('C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B')
         y_pos = np.arange(len(objects))
         performance = self.get_profile()
         
+        plt.figure()
         plt.bar(y_pos, performance, align='center', alpha=0.5)
         plt.xticks(y_pos, objects)
         plt.ylabel('Energy')
-        plt.title('PCP results')
-        
-        plt.show()
+        plt.title('PCP results')        
+        plt.savefig(os.path.join(path,'profile.png'))
+        #plt.show()
 
 class LongFileProfiler(PitchClassProfiler):
     def __init__(self, file_name):
         super().__init__(file_name)
         self.current_pointer = 0
-        self.window = self.frecuency() // 2
+        self.window = self.frequency() // 2
         print(self.window)
 
     def get_profile(self):

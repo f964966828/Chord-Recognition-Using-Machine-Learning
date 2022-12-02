@@ -12,6 +12,7 @@ train_json_name = params["train_json_name"]
 test_data_path = params["test_data_path"]
 test_json_name = params["test_json_name"]
 test_file_name = params["test_file_name"]
+image_path = params["image_path"]
 mode = params["mode"]
 unit = params["unit"]
 
@@ -31,9 +32,12 @@ def save_pitch():
         data = {
             "mapping": [],
             "labels": [],
+            "len" : [],
+            "new": [],
+            "frequency":[],
             "pitch": []
-        }
-
+        }        
+        plot_flag = True
         # loop through all chord sub-folder
         for i, label_name in enumerate(os.listdir(train_data_path)):
             
@@ -46,9 +50,18 @@ def save_pitch():
 
             for file_name in os.listdir(train_label_path):
                 file_path = os.path.join(train_label_path, file_name)
-
-                # process all segments of audio file
-                ptc=PitchClassProfiler(file_path)
+                ptc=PitchClassProfiler(file_path)                
+                if(plot_flag):
+                    ptc.plot_signal(image_path)
+                    ptc.plot_fourier(image_path)
+                    ptc.plot_profile(image_path)
+                    plot_flag = False                    
+                if(file_name[0].islower()):                    
+                    data['new'].append(0)
+                else:                    
+                    data['new'].append(1)
+                data['frequency'].append(ptc.frequency())
+                data['len'].append(ptc.get_len())
                 data["pitch"].append(ptc.get_profile())
                 data["labels"].append(i)
                 print("{} \t label:{}".format(file_path, i))
@@ -68,6 +81,7 @@ def save_pitch():
         data = {
             "mapping": [],
             "labels": [],
+            "len" : [],
             "pitch": []
         }
 
