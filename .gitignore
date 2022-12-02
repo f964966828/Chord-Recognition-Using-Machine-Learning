@@ -130,3 +130,7 @@ dmypy.json
 
 # Testing Dataset folder
 TestWave
+NewDataset
+
+# params file
+params.yaml

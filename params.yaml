@@ -1,6 +1,6 @@
 
 # data path 
-train_data_path: "Dataset"
+train_data_path: "NewDataset"
 train_json_name: "data.json"
 test_data_path: "TestWave"
 test_json_name: "test.json"
