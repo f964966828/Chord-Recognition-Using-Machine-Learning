@@ -68,8 +68,7 @@ def save_pitch():
         data = {
             "mapping": [],
             "labels": [],
-            "pitch": [],
-            "order":[]
+            "pitch": []
         }
 
         label_name = "unknown"
@@ -82,8 +81,6 @@ def save_pitch():
 
             # load audio file
             file_path = os.path.join(test_wav_path, file_name)
-            order = file_name.replace(".wav", "")
-            data["order"].append(order)
 
             # process all segments of audio file
             ptc=PitchClassProfiler(file_path)
@@ -91,21 +88,6 @@ def save_pitch():
             data["labels"].append(label)
             print("{} \t label:{}".format(file_path, label))
         
-        #Sorting the dictionary
-        n = len(data["order"]) 
-        for i in range(n-1): 
-        # range(n) also work but outer loop will repeat one time more than needed. 
-    
-            # Last i elements are already in place 
-            for j in range(0, n-i-1): 
-    
-                # traverse the array from 0 to n-i-1 
-                # Swap if the element found is greater 
-                # than the next element 
-                if int(data["order"][j]) > int(data["order"][j+1]) : 
-                    data["order"][j],data["order"][j+1]=data["order"][j+1],data["order"][j]
-                    data["pitch"][j],data["pitch"][j+1]=data["pitch"][j+1],data["pitch"][j]
-                    data["labels"][j],data["labels"][j+1]=data["labels"][j+1],data["labels"][j]
 
         # save pitch classes to json file
         with open(test_json_path, "w") as fp:

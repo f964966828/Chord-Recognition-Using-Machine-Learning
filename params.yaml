@@ -1,6 +1,6 @@
 
 # data path 
-train_data_path: "Dataset"
+train_data_path: "NewDataset"
 train_json_name: "data.json"
 test_data_path: "TestWave"
 test_json_name: "test.json"
@@ -14,5 +14,5 @@ split_ratio: 0.25
 random_seed: 20010113
 
 # preprocessing parameters
-mode: "test" # train / test
+mode: "train" # train / test
 unit: 22050 # splitting unit for test file
