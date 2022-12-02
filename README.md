@@ -13,6 +13,10 @@
   - input: train json file
   - algorithm implementation
   - `python [KNN/SVM/DecisionTree].py`
+- compare.py
+  - imput: train json file
+  - compare performance between algorithms
+  - `python compare.py`
 - test.py
   - input: test json file
   - get prediction result of given file
