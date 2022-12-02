@@ -32,8 +32,8 @@ def save_pitch():
             "mapping": [],
             "labels": [],
             "pitch": []
-        }
-
+        }        
+        #plot_flag = True
         # loop through all chord sub-folder
         for i, label_name in enumerate(os.listdir(train_data_path)):
             
@@ -49,6 +49,9 @@ def save_pitch():
 
                 # process all segments of audio file
                 ptc=PitchClassProfiler(file_path)
+                #if(plot_flag):
+                    #ptc.plot_profile()
+                    #plot_flag = False                
                 data["pitch"].append(ptc.get_profile())
                 data["labels"].append(i)
                 print("{} \t label:{}".format(file_path, i))

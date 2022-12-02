@@ -47,7 +47,13 @@ class PitchClassProfiler():
         self.read = False
 
     def _read_file(self):
-        self._frecuency, self._samples = wavfile.read(self.file_name)   
+        self._frecuency, samples = wavfile.read(self.file_name)   
+        #print(samples.shape)
+        try:
+            self._samples = samples[:, 0]
+        except:
+            self._samples = samples
+        #print(self._samples.shape)
         self.read = True
 
     def frecuency(self):
