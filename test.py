@@ -17,7 +17,7 @@ if __name__ == "__main__":
 
     X, y, m = load_data(train_json_path, return_mapping=True)
     X_test, _, _ = load_data(test_json_path, return_mapping=True)
-
+    print(X)
     #Create Classifier
     model_knn = KNeighborsClassifier(n_neighbors=3)
     model_dt=DecisionTreeClassifier()
@@ -51,3 +51,6 @@ if __name__ == "__main__":
         print(m[y_pred_svm_lin[i]],end=' ' )
     print("\nReal chords: ")
     print("em g em g em em em g em em g g em g g g em g g g em em g em em g g em em g g")
+    
+   
+    
