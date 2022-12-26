@@ -85,7 +85,7 @@ def save_pitch():
         frecuency, samples = wavfile.read(test_file_path)
         N = len(samples) // unit
         for i in range(N):
-            write(os.path.join(test_wav_path, f"{i}.wav"), frecuency,samples[ i * unit : (i+1) * unit ])
+            write(os.path.join(test_wav_path, "{:03d}.wav".format(i)), frecuency,samples[ i * unit : (i+1) * unit ])
         
         data = {
             "mapping": [],
@@ -100,7 +100,9 @@ def save_pitch():
         data["mapping"].append(label_name)
         print("\nProcessing: {}".format(label_name))
 
-        for file_name in os.listdir(test_wav_path):
+        files = os.listdir(test_wav_path)
+        files.sort()
+        for file_name in files[:110]:
 
             # load audio file
             file_path = os.path.join(test_wav_path, file_name)
@@ -110,6 +112,7 @@ def save_pitch():
             data["pitch"].append(ptc.get_profile())
             data["labels"].append(label)
             print("{} \t label:{}".format(file_path, label))
+            #print(ptc.get_profile())
         
 
         # save pitch classes to json file

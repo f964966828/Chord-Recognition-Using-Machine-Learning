@@ -17,7 +17,7 @@ if __name__ == "__main__":
 
     X, y, m = load_data(train_json_path, return_mapping=True)
     X_test, _, _ = load_data(test_json_path, return_mapping=True)
-    print(X)
+
     #Create Classifier
     model_knn = KNeighborsClassifier(n_neighbors=3)
     model_dt=DecisionTreeClassifier()
