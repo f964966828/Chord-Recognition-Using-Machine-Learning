@@ -16,4 +16,4 @@ random_seed: 20010113
 
 # preprocessing parameters
 mode: "test" # train / test
-unit: 30000 # splitting unit for test file
+unit: 44100 # splitting unit for test file

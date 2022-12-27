@@ -61,7 +61,20 @@ if __name__ == "__main__":
     plt.title('Algorithm Accuracy Comparison')
     plt.savefig('Algorithm Accuracy Comparison.png')
     
-    target_names = ['A', 'Am', 'Bb', 'Bdim', 'Bm', 'C', 'D', 'Dm', 'E', 'Em', 'F', 'G'] 
+    target_names = [
+        "E",
+        "C",
+        "D",
+        "Em",
+        "Bdim",
+        "Dm",
+        "G",
+        "Am",
+        "A",
+        "Bm",
+        "F",
+        "Bb"
+    ]
     #print('KNN_classification_report: \n' + classification_report(y_test, y_pred_knn, target_names=target_names)) 
     #print('Decision Tree_classification_report: \n' + classification_report(y_test, y_pred_dt, target_names=target_names)) 
     #print('SVC - Linear Kernal_classification_report: \n' + classification_report(y_test, y_pred_svc_lin, target_names=target_names)) 
@@ -165,28 +178,28 @@ if __name__ == "__main__":
     #confusion matrix saved as a png file
     cm = metrics.confusion_matrix(y_true=y_test,  y_pred =  y_pred_knn, labels = range(12))
     plt.figure(figsize=(10,6))
-    sns.heatmap(cm, annot=True, linewidths=.5, square = True, cmap = 'Blues_r', fmt='0.4g')
+    sns.heatmap(cm, annot=True, linewidths=.5, square = True, cmap = 'Blues_r', fmt='0.4g', xticklabels=target_names, yticklabels=target_names)
     plt.ylabel('Actual label')
     plt.xlabel('Predicted label')
     plt.title('KNN_Confusion matrix')
     plt.savefig('KNN_Confusion matrix.png')
     cm = metrics.confusion_matrix(y_true=y_test,  y_pred =  y_pred_dt, labels = range(12))
     plt.figure(figsize=(10,6))
-    sns.heatmap(cm, annot=True, linewidths=.5, square = True, cmap = 'Blues_r', fmt='0.4g')
+    sns.heatmap(cm, annot=True, linewidths=.5, square = True, cmap = 'Blues_r', fmt='0.4g', xticklabels=target_names, yticklabels=target_names)
     plt.ylabel('Actual label')
     plt.xlabel('Predicted label')
     plt.title('Decision Tree_Confusion matrix')
     plt.savefig('Decision Tree_Confusion matrix.png')
     cm = metrics.confusion_matrix(y_true=y_test,  y_pred =  y_pred_svc_lin, labels = range(12))
     plt.figure(figsize=(10,6))
-    sns.heatmap(cm, annot=True, linewidths=.5, square = True, cmap = 'Blues_r', fmt='0.4g')
+    sns.heatmap(cm, annot=True, linewidths=.5, square = True, cmap = 'Blues_r', fmt='0.4g', xticklabels=target_names, yticklabels=target_names)
     plt.ylabel('Actual label')
     plt.xlabel('Predicted label')
     plt.title('SVC - Linear Kernal_Confusion matrix')
     plt.savefig('SVC - Linear Kernal_Confusion matrix.png')
     cm = metrics.confusion_matrix(y_true=y_test,  y_pred =  y_pred_svc_rbf, labels = range(12))
     plt.figure(figsize=(10,6))
-    sns.heatmap(cm, annot=True, linewidths=.5, square = True, cmap = 'Blues_r', fmt='0.4g')
+    sns.heatmap(cm, annot=True, linewidths=.5, square = True, cmap = 'Blues_r', fmt='0.4g', xticklabels=target_names, yticklabels=target_names)
     plt.ylabel('Actual label')
     plt.xlabel('Predicted label')
     plt.title('SVC - RBF_Confusion matrix')

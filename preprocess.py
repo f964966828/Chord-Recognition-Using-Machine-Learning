@@ -102,7 +102,7 @@ def save_pitch():
 
         files = os.listdir(test_wav_path)
         files.sort()
-        for file_name in files[:110]:
+        for file_name in files:
 
             # load audio file
             file_path = os.path.join(test_wav_path, file_name)
